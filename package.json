@@ -1,5 +1,15 @@
 {
   "name": "time_to_answer",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap": "3.3.7",
+    "font-awesome": "4.6.3",
+    "jquery": "^3.3.1",
+    "metismenu": "3.0.3"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/decosawa/Time-To-Answer.git",
+  "author": "decosawa <62211442+decosawa@users.noreply.github.com>",
+  "license": "MIT"
 }
