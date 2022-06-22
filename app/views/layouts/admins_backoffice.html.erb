@@ -88,11 +88,28 @@
           </div>
           <!-- /#page-wrapper -->
 
-      </div>
+    </div>
       <!-- /#wrapper -->
 
       <%= javascript_include_tag 'application' %>
       <%= javascript_include_tag 'admins_backoffice' %>
+
+    <% if notice %>
+
+        <script>
+
+            $.bootstrapGrowl('<%= notice %>', {
+
+                type: 'success',
+                align: 'right', 
+                allow_dismiss: true,
+                stackup_spacing: 10 
+
+            });
+
+        </script>
+    
+    <% end %>
 
   </body>
 

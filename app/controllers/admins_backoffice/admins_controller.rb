@@ -1,7 +1,7 @@
 class AdminsBackoffice::AdminsController < AdminsBackofficeController
 
   before_action :verify_password, only: [:update]
-  before_action :set_admin, only: [:update, :edit]
+  before_action :set_admin, only: [:update, :edit, :destroy]
 
 
   def index
@@ -26,7 +26,7 @@ class AdminsBackoffice::AdminsController < AdminsBackofficeController
     
     else
 
-      render :new, notice: "Administrador não criado"
+      render :index, notice: "Administrador não criado"
 
     end
 
@@ -45,6 +45,20 @@ class AdminsBackoffice::AdminsController < AdminsBackofficeController
 
       render :edit, notice: "Administrador não atualizado"
 
+    end
+
+  end
+
+  def destroy
+
+    if @admin.destroy
+
+      redirect_to admins_backoffice_admins_path, notice: "Administrador excluído com sucesso!"
+
+    else
+
+      render :index
+      
     end
 
   end
