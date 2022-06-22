@@ -14,10 +14,10 @@ class AdminsBackoffice::AdminsController < AdminsBackofficeController
 
   def update
 
-    admin = Admin.find(params[:id])
+    @admin = Admin.find(params[:id])
     p_admin = params.require(:admin).permit(:email, :password, :password_confirmation)
 
-    if(admin.update(p_admin))
+    if(@admin.update(p_admin))
 
       redirect_to admins_backoffice_admins_path, notice: "Administrador atualizado com sucesso!"
     
