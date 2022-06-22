@@ -10,6 +10,28 @@ class AdminsBackoffice::AdminsController < AdminsBackofficeController
 
   end
 
+  def new
+
+    @admin = Admin.new
+
+  end
+
+  def create
+
+    @admin = Admin.new(params_admin)
+
+    if(@admin.save)
+
+      redirect_to admins_backoffice_admins_path, notice: "Administrador criado com sucesso!"
+    
+    else
+
+      render :new, notice: "Administrador não criado"
+
+    end
+
+  end
+
   def edit 
   end
 
