@@ -10,8 +10,8 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>Descrição</th>
-                <th>Assunto</th>
+                <th><%= translate_attribute(@questions, :description) %></th>
+                <th><%= translate_attribute(@questions, :subject)  %></th>
                 <th>
                     <%= link_to new_admins_backoffice_question_path, class: 'btn btn-success' do%>
                         Adicionar
@@ -34,7 +34,7 @@
                         <%= link_to admins_backoffice_question_path(question), method: :delete, class: "btn btn-danger btn-circle", data: { confirm: "Você realmente deseja realmente excluir essa pergunta?" } do %>
                             <i class="fa fa-minus"></i>
                         <% end %>
-                        
+
                     </td>
                 </tr>
             <% end %>
