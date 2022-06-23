@@ -130,12 +130,13 @@ namespace :dev do
 
       rand(2..10).times do |i|
 
-        Question.create!(
+        params = create_question_params(subject)
+        answers_array = params[:question][:answers_attributes]
 
-          description: "#{Faker::Lorem.paragraph} #{Faker::Lorem.question}",
-          subject: subject
+        add_answers(answers_array)
+        correct_answer(answers_array)
 
-        )
+        Question.create!(params[:question])
 
       end
 
@@ -144,6 +145,46 @@ namespace :dev do
   end
 
   private
+
+    def create_question_params(subject = Subject.all.sample)
+
+      { question: { 
+
+        description: "#{Faker::Lorem.paragraph} #{Faker::Lorem.question}",
+        subject: subject,
+        answers_attributes: []
+
+      }}
+
+    end
+
+    def create_answer_params(correct = false)
+
+      { 
+
+        description: Faker::Lorem.sentence, 
+        correct: correct
+
+      }     
+
+    end
+
+    def add_answers(answers_array = [])
+
+      rand(2..5).times do |j|
+
+        answers_array.push(create_answer_params(true))
+
+      end
+
+    end
+
+    def correct_answer(answers_array = [])
+    
+      selected_index = rand(answers_array.size)
+      answers_array[selected_index] = create_answer_params(true)
+      
+    end
 
     def show_spinner(msg_start, msg_end)
 
