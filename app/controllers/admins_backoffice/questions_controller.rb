@@ -26,7 +26,7 @@ class AdminsBackoffice::QuestionsController < AdminsBackofficeController
     
     else
 
-      render :index, notice: "Pergunta não criada"
+      render :new
 
     end
 
@@ -43,7 +43,7 @@ class AdminsBackoffice::QuestionsController < AdminsBackofficeController
     
     else
 
-      render :edit, notice: "Pergunta não atualizada"
+      render :edit
 
     end
 
@@ -73,7 +73,7 @@ class AdminsBackoffice::QuestionsController < AdminsBackofficeController
 
     def params_question 
       
-      params.require(:question).permit(:description)
+      params.require(:question).permit(:description, :subject_id)
 
     end
 
