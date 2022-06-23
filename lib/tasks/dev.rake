@@ -8,7 +8,7 @@ namespace :dev do
     
     if(Rails.env.development?)
 
-      show_spinner("Erasing database...", "Task finished! | 1/7" ) do
+      show_spinner("Erasing database...", "Task finished! | 1/8" ) do
 
         %x(rails db:drop)
 
@@ -16,39 +16,45 @@ namespace :dev do
 
 
 
-      show_spinner("Creating database...", "Task finished! | 2/7" ) do
+      show_spinner("Creating database...", "Task finished! | 2/8" ) do
 
         %x(rails db:create)
 
       end
 
-      show_spinner("Migrating database...", "Task finished! | 3/7" ) do
+      show_spinner("Migrating database...", "Task finished! | 3/8" ) do
 
         %x(rails db:migrate)
 
       end
 
-      show_spinner("Adding default admin...", "Task finished! | 4/7" ) do
+      show_spinner("Adding default admin...", "Task finished! | 4/8" ) do
 
         %x(rails dev:add_default_admin)
 
       end
 
-      show_spinner("Adding default user...", "Task finished! | 5/7" ) do
+      show_spinner("Adding default user...", "Task finished! | 5/8" ) do
 
         %x(rails dev:add_default_user)
 
       end
 
-      show_spinner("Adding extra admin...", "Task finished! | 6/7" ) do
+      show_spinner("Adding extra admin...", "Task finished! | 6/8" ) do
 
         %x(rails dev:add_extra_admins)
 
       end
 
-      show_spinner("Registering default subjects...", "Task finished! | 7/7" ) do
+      show_spinner("Registering default subjects...", "Task finished! | 7/8" ) do
 
         %x(rails dev:add_subjects)
+
+      end
+
+      show_spinner("Registering default questions and answers...", "Task finished! | 8/8" ) do
+
+        %x(rails dev:add_questions_and_answers)
 
       end
 
@@ -112,6 +118,26 @@ namespace :dev do
     File.open(file_path, 'r').each do |line|
       
       Subject.create!(description: line.strip)
+
+    end
+  
+  end
+
+  desc "Register default questions and answers"
+  task add_questions_and_answers: :environment do
+
+    Subject.all.each do |subject|
+
+      rand(2..10).times do |i|
+
+        Question.create!(
+
+          description: "#{Faker::Lorem.paragraph} #{Faker::Lorem.question}",
+          subject: subject
+
+        )
+
+      end
 
     end
   
