@@ -173,7 +173,7 @@ namespace :dev do
 
       rand(2..5).times do |j|
 
-        answers_array.push(create_answer_params(true))
+        answers_array.push(create_answer_params)
 
       end
 
