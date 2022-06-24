@@ -35,7 +35,7 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2><%= current_user.email %></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -181,7 +181,7 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <%= link_to destroy_admin_session_path, method: :delete do %>
+                    <%= link_to destroy_user_session_path, method: :delete do %>
                       <i class="fa fa-sign-out pull-right"></i>Sair
                     <% end %>
                   </ul>
