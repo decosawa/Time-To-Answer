@@ -2,7 +2,7 @@ class Site::WelcomeController < SiteController
 
   def index
 
-    @questions = Questions.last_questions(params[:page])
+    @questions = Question.last_questions(params[:page])
     
   end
 

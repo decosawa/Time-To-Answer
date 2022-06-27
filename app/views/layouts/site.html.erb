@@ -66,16 +66,15 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
 
-        <% if user_signed_in? %>
-          <p> Usuário Logado </p>
-          <p><%= current_user.email %></p>
-        <% end %>
+        <% unless params[:term] %>
 
-        <% if admin_signed_in? %>
-          <p> Administrador Logado </p>
-          <p><%= current_admin.email %></p>
-        <% end %>
-        
+          <h3>Últimas perguntas cadastradas...</h3>
+
+        <% else %>
+
+          <h3>Resultados para o termo "<%= params[:term] %>"...</h3>
+
+        <%end%>
       </div>
 
       <%= yield %>
