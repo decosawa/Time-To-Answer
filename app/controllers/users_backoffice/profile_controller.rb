@@ -5,6 +5,7 @@ class UsersBackoffice::ProfileController < UsersBackofficeController
 
     def edit
 
+      @user.build_user_profile if @user.user_profile.blank?
 
     end
 
@@ -34,7 +35,8 @@ class UsersBackoffice::ProfileController < UsersBackofficeController
 
         def params_user 
       
-            params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+            params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation
+            user_profile_attributes: [:address, :birthdate, :gender, :id)
       
           end
 
