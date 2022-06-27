@@ -34,7 +34,12 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2><% if current_user.first_name && current_user.last_name%>
+                      <%= current_user.full_name %>
+                    <% else %>
+                      <%= current_user.email %>
+                    <% end %>
+                </h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -202,5 +207,23 @@
 
     <%= javascript_include_tag 'application' %>
     <%= javascript_include_tag 'users_backoffice' %>
+
+    <% if notice %>
+
+      <script>
+
+          $.bootstrapGrowl('<%= notice %>', {
+
+              type: 'success',
+              align: 'right', 
+              allow_dismiss: true,
+              stackup_spacing: 10 
+
+          });
+
+      </script>
+  
+  <% end %>
+
   </body>
 </html>
