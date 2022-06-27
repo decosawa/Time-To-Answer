@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
   namespace :users_backoffice do
     get 'welcome/index'
+    get 'profile', to: 'profile#edit'
   end
   namespace :admins_backoffice do
     get 'welcome/index'
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
     resources :questions
   end
   
-  devise_for :admins
+  devise_for :admins, skip: [:registrations]
   devise_for :users
 
   get 'index', to: 'site/welcome#index'
