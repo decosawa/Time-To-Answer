@@ -13,24 +13,24 @@ class UsersBackoffice::ProfileController < UsersBackofficeController
 
         if(@user.update(params_user))
 
-            sign_in(@user, bypass: true)
+          sign_in(@user, bypass: true)
 
-            if (paramas_user[:user_profile_attributes][:avatar])
-              
-              redirect_to users_backoffice_welcome_index_path
+          if (params_user[:user_profile_attributes][:avatar])
+            
+            redirect_to users_backoffice_welcome_index_path
 
-            else
-
-              redirect_to users_backoffice_profile_path, notice: "Usuário atualizado com sucesso!"
-
-            end
-          
           else
-      
-            render :edit, notice: "Usuário não atualizado"
-      
+
+            redirect_to users_backoffice_profile_path, notice: "Usuário atualizado com sucesso!"
+
           end
-      
+        
+        else
+    
+          render :edit, notice: "Usuário não atualizado"
+    
+        end
+    
 
     end
 
