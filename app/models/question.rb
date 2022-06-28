@@ -5,6 +5,8 @@ class Question < ApplicationRecord
   accepts_nested_attributes_for :answers, reject_if: :all_blank, allow_destroy: true
   paginates_per 10
 
+  after_create :set_statistic
+
   scope :_search_, ->(page, term){
 
     includes(:answers, :subject).where("lower(description) LIKE ?", "%#{term.downcase}%").page(page)
@@ -22,5 +24,11 @@ class Question < ApplicationRecord
     includes(:answers, :subject).order('created_at desc').page(page)
 
   }
+
+  def set_statistic
+
+    AdminStatistic.set_total(AdminStatistic::EVENT[:total_questions])
+
+  end
 
 end
