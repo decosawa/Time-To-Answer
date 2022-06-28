@@ -30,7 +30,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <%= link_to image_tag('img.jpg', alt:"...", class:"img-circle profile_img"), '#', "data-toggle":"modal", "data-target":"#avatarModal" %>
+                <%=link_to image_tag(avatar_url, alt:"...", class:"img-circle profile_img"), '#', "data-toggle":"modal", "data-target":"#avatarModal" %>
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
@@ -96,7 +96,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <%= image_tag 'img.jpg', alt:'' %>
+                    <%= image_tag avatar_url, alt:'' %>
                     <%= current_user.email %>
                     <span class=" fa fa-angle-down"></span>
                   </a>
@@ -115,7 +115,7 @@
                     <li>
                       <a>
                         <span class="image">
-                          <%= image_tag 'img.jpg', alt:"Profile Image" %>
+                          <%= image_tag avatar_url, alt:"Profile Image" %>
                         </span>
                         <span>
                           <span>John Smith</span>
@@ -129,7 +129,7 @@
                     <li>
                       <a>
                         <span class="image">
-                          <%= image_tag 'img.jpg', alt:"Profile Image" %>
+                          <%= image_tag avatar_url, alt:"Profile Image" %>
                         </span>
                         <span>
                           <span>John Smith</span>
@@ -143,7 +143,7 @@
                     <li>
                       <a>
                         <span class="image">
-                          <%= image_tag 'img.jpg', alt:"Profile Image" %>
+                          <%= image_tag avatar_url, alt:"Profile Image" %>
                         </span>
                         <span>
                           <span>John Smith</span>
@@ -157,7 +157,7 @@
                     <li>
                       <a>
                         <span class="image">
-                          <%= image_tag 'img.jpg', alt:"Profile Image" %>
+                          <%= image_tag avatar_url, alt:"Profile Image" %>
                         </span>
                         <span>
                           <span>John Smith</span>
@@ -208,22 +208,28 @@
     <div class="modal fade" id="avatarModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-          </div>
-          <div class="modal-body">
-            ...
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+          <%= form_with(url: users_backoffice_profile_path, model: current_user, local:true, class: 'form-horizontal form-label-left' ) do |form| %>
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Avatar</h4>
+            </div>
+            <div class="modal-body">
+              <%= form.fields_for :user_profile do |f| %>
+                <%= image_tag avatar_url, alt:"...", class:"img-circle profile_img" %>
+                <div class="form-group">
+                    <%= f.label :avatar %>
+                    <%= f.file_field :avatar %>
+                </div>
+              
+              <% end %>
+            </div>
+            <div class="modal-footer">
+              <%= form.submit 'Save', class: 'btn btn-primary' %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
-
-    
 
     <%= javascript_include_tag 'application' %>
     <%= javascript_include_tag 'users_backoffice' %>
