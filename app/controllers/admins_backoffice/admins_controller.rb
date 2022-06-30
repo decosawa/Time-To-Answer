@@ -39,6 +39,8 @@ class AdminsBackoffice::AdminsController < AdminsBackofficeController
 
     if(@admin.update(params_admin))
 
+      AdminMailer.update_email(current_admin, @admin).deliver_now 
+
       redirect_to admins_backoffice_admins_path, notice: "Administrador atualizado com sucesso!"
     
     else
