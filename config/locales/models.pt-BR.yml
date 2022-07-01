@@ -35,6 +35,7 @@
         birthdate: Data de Nascimento
         address: Endereço
         gender: Gênero
+        zip_code: CEP 
       subject:
         id: Código
         description: Descrição
