@@ -159,6 +159,21 @@ namespace :dev do
 
   end
 
+  desc "Adds all the answer in Redis"
+  task add_answers_redis: :environment do
+
+    show_spinner('Adding all the answers in Redis', 'Task finished!') do
+
+      Answer.all.each do |answer|
+        
+        Rails.cache.write(answer.id, "#{answer.question_id}@@#{answer.correct}")
+
+      end
+      
+    end
+
+  end
+
   private
 
     def create_question_params(subject = Subject.all.sample)
