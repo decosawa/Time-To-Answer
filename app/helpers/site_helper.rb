@@ -10,11 +10,11 @@ module SiteHelper
 
         when 'questions'
 
-            "Resultados para o termo \"#{params[:term]}\"."
+            "Resultados para o termo \"#{ sanitize params[:term]}\"."
 
         when 'subject'
 
-            "Perguntas para o assunto #{params[:subject]}."
+            "Perguntas para o assunto #{ sanitize params[:subject]}."
 
         end
 
